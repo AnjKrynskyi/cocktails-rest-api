@@ -1,0 +1,23 @@
+{
+  "name": "cocktails-rest-api",
+  "version": "1.0.0",
+  "description": "rest api study project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server/server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api"
+  ],
+  "author": "Andrii Krynskyi <andrii.krynskyi@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
