@@ -1,4 +1,4 @@
-### cocktails-rest-api
+# `cocktails-rest-api`
 
 - Node Js
 - Express

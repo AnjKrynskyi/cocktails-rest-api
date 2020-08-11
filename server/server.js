@@ -1,40 +1,27 @@
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const app = express();
-const paginateData = require('./functions/paginateData');
+const apiRoutes = require('./routes/apiRoutes');
+const handleErrors = require('./functions/handleErrors');
 
-const PORT = 8081;
-const RECIPES = path.resolve(__dirname, 'cocktails', 'recipes.json');
-const INGREDIENTS = path.resolve(__dirname, 'cocktails', 'ingredients.json');
+const PORT = process.env.PORT || 8081;
+
+// View engine
+app.set('view engine', 'pug');
+app.set('views', path.resolve(__dirname, 'views'));
 
 // Static directory
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, 'static')));
 
-// Serve client
+// Home page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
+  res.render('home', { url: req.protocol + '://' + req.get('host') + req.originalUrl });
 });
 
 // API
-app.get('/recipes', (req, res) => {
-  const { page } = req.query;
-  console.log(page);
+app.use('/api', apiRoutes);
 
-  fs.readFile(RECIPES, 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
+// Errors handler
+app.use(handleErrors);
 
-    if (page) {
-      const chunk = paginateData(JSON.parse(data), +page);
-      res.send(chunk);
-      return;
-    }
-
-    res.send(JSON.parse(data));
-  })
-});
-
-app.listen(PORT, () => console.log(`Server started on localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port:${PORT}`));
