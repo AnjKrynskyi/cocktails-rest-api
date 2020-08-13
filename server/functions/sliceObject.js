@@ -1,6 +1,6 @@
 const paginateData = require('./paginateData');
 
-function sliceObject(obj, page, perPage = 10) {
+function sliceObject(obj, page, perPage) {
   const keys = Object.keys(obj);
   const chunk = paginateData(keys, page, perPage);
 

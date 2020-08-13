@@ -4,12 +4,23 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(type="text/css", rel="stylesheet", href="/style.css")
-    title Cocktails | API
+    title Cocktails | REST API
   body
     .container
-      h1 Cocktails
+      h1 Cocktails.db
       .wrapper
+        h2 Endpoints:
         .panel
-          a(href="/api/recipes") #{url}api/recipes
+          a(href="/api/recipes", target="_blanc") #{url}api/recipes
+          span get all recipes
         .panel
-          a(href="/api/ingredients") #{url}api/ingredients
+          a(href="/api/ingredients", target="_blanc") #{url}api/ingredients
+          span get all ingredients
+        h2 Query params:
+        .block
+          p 
+            strong ?page=number | 
+            em page by default = 1
+          p 
+            strong ?perPage=number | 
+            em perPage by default = 10
